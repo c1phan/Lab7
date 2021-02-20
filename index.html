@@ -181,11 +181,11 @@
       // the writeup to view the URL pattern for create and update
       function updateRecord(command) {
         let url = document.getElementById('endpoint').value;
+        let id = document.getElementById('recordID').value;
         if(command == 'submit') {
           let output = document.getElementById('output');
           let author = document.getElementById('author').value;
           let title = document.getElementById('title').value;
-          let id = document.getElementById('recordID').value;
         }
         else if(command == 'show') {
           document.getElementById("recordForm").style.display = "inline";
