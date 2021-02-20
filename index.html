@@ -185,17 +185,17 @@
       // From the 4 CRUD actions, this is the UPDATE action, and uses the PUT http method.
       // The main difference from createRecord() will be the URL you send data to; check
       // the writeup to view the URL pattern for create and update
-      function updateRecord(type) {
+      function updateRecord(action) {
+        let url = document.getElementById('endpoint').value;
         if(type == 'submit') {
           let output = document.getElementById('output');
-          let url = document.getElementById('endpoint').value;
           let author = document.getElementById('author').value;
           let title = document.getElementById('title').value;
           let id = document.getElementById('recordID').value;
         }
         else if(type == 'show') {
-          document.getElementById("recordIDcontainer").style.display = "inline";
           document.getElementById("recordForm").style.display = "inline";
+          document.getElementById("recordIDcontainer").style.display = "inline";
         }
 
         console.log("updateRecord1: " + output);
@@ -208,15 +208,21 @@
         url = url + '/' + id;
 
         fetch(url, {
-            method: 'PUT', 
+            method: 'put', 
             headers: {
               'Content-type': 'application/json'
             },
             body: JSON.stringify(data)
           })
-          .then(response => response.json())
-          .then(data => {
-            output.innerHTML = JSON.stringify(data);
+          .then(response => {
+            if(!response.ok){
+              output.innerHTML = `${response.status}: ${response.statusText}`;
+            }
+            else {
+              response.json().then(data =>
+                output.innerHTML = JSON.stringify(data)
+              );
+            }
           })
           .catch((err) => {
             output.innerHTML = err;
@@ -248,8 +254,7 @@
             method: 'DELETE', 
             headers: {
               'Content-type': 'application/json'
-            },
-            body: JSON.stringify(data)
+            }
           })
           .then(function(response) {
             output.innerHTML = JSON.stringify(data);
