@@ -145,7 +145,7 @@
       // From the 4 CRUD actions, this is the CREATE action, and uses the POST http method.
       // The main difference from updateRecord() will be the URL you send data to; check
       // the writeup to view the URL pattern for create and update
-      function createRecord(datatype) {
+      function createRecord(type) {
 
         let output = document.getElementById('output');
         let url = document.getElementById('endpoint').value;
@@ -157,7 +157,7 @@
           "title": title
         };
 
-        if(datatype == "submit"){
+        if(type == "submit"){
           fetch(url, {
             method: 'POST', 
             headers: {
@@ -173,7 +173,7 @@
             output.innerHTML = err;
           })
         }
-        else if(datatype == "show"){
+        else if(type == "show"){
           document.getElementById("recordForm").style.display = "inline";
         }
       }
@@ -182,15 +182,15 @@
       // From the 4 CRUD actions, this is the UPDATE action, and uses the PUT http method.
       // The main difference from createRecord() will be the URL you send data to; check
       // the writeup to view the URL pattern for create and update
-      function updateRecord(datatype) {
-        if(datatype == 'submit') {
+      function updateRecord(type) {
+        if(type == 'submit') {
           let output = document.getElementById('output');
           let url = document.getElementById('endpoint').value;
           let author = document.getElementById('author').value;
           let title = document.getElementById('title').value;
           let id = document.getElementById('recordID').value;
         }
-        else if(datatype == 'show') {
+        else if(type == 'show') {
           document.getElementById("recordIDcontainer").style.display = "inline";
           document.getElementById("recordForm").style.display = "inline";
         }
