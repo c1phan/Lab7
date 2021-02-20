@@ -101,6 +101,7 @@
             .catch(err =>
               output.innerHTML = err
             );
+            console.log("fetchAll: " + output);
       }
 
       // This function should fetch one entry from the given endpoint.
@@ -130,6 +131,7 @@
                 response.json().then(data => 
                   output.innerHTML = JSON.stringify(data)
                 );
+                console.log("fetchOne: " + output);
               }
             }
           )
@@ -148,6 +150,8 @@
         let url = document.getElementById('endpoint').value;
         let author = document.getElementById('author').value;
         let title = document.getElementById('title').value;
+
+        console.log("createRecord1: " + output);
 
         let data = {
           "author": author,
@@ -173,6 +177,8 @@
         else if(type == "show"){
           document.getElementById("recordForm").style.display = "inline";
         }
+
+        console.log("createRecord2: " + output);
       }
 
       // This function should use fetch to update one existing entry in the given endpoint.
@@ -191,6 +197,8 @@
           document.getElementById("recordIDcontainer").style.display = "inline";
           document.getElementById("recordForm").style.display = "inline";
         }
+
+        console.log("updateRecord1: " + output);
 
         let data = {
           "author": author,
@@ -213,6 +221,7 @@
           .catch((err) => {
             output.innerHTML = err;
           })
+          console.log("updateRecord2: " + output);
 
       }
 
@@ -225,6 +234,9 @@
         let url = document.getElementById("endpoint").value;
         let id = window.prompt("Enter record id");
         let output = document.getElementById("output");
+
+        console.log("deleteRecord1: " + output);
+
         if(id == "" || id == null){
           output.innerHTML = "The input is invalid";
           return;
@@ -245,6 +257,8 @@
           .catch((err) => {
             output.innerHTML = err;
           })
+
+          console.log("deleteRecord2: " + output);
       }
 
       window.addEventListener('DOMContentLoaded', () => {
