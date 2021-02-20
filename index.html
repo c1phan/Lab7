@@ -185,7 +185,7 @@
       // From the 4 CRUD actions, this is the UPDATE action, and uses the PUT http method.
       // The main difference from createRecord() will be the URL you send data to; check
       // the writeup to view the URL pattern for create and update
-      function updateRecord(action) {
+      function updateRecord(type) {
         let url = document.getElementById('endpoint').value;
         if(type == 'submit') {
           let output = document.getElementById('output');
