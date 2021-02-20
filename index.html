@@ -86,24 +86,21 @@
 
       function fetchAll() {
         let output = document.getElementById("output");
-        let url = document.getElementById("endpoint");
+        let url = document.getElementById("endpoint").value;
         fetch(url)
           .then(
             function(response) {
-              if(response.status !== 200) {
-                throw Error(response.statusText);
-                return;
+              if(!response.ok) {
+                output.innerHTML = `${response.status}: ${response.statusText}`;
               }
-
-              //Examine the text in the response
-              response.json().then(function(data) {
-                output.innerHTML = JSON.stringify(data);
-              });
-            }
-          )
-          .catch(function(err) {
-            output.innerHTML = err;
-          });
+              else {
+                response.json().then(data =>
+                output.innerHTML = JSON.stringify(data));
+              }
+            })
+            .catch(err =>
+              output.innerHTML = err
+            );
       }
 
       // This function should fetch one entry from the given endpoint.
@@ -111,7 +108,7 @@
       // The main difference from fetchAll() will be the URL you request from; check
       // the writeup to view the URL pattern for fetch one and fetch all
       function fetchOne() {
-        let url = document.getElementById("endpoint");
+        let url = document.getElementById("endpoint").value;
         let id = window.prompt("Enter record id");
         let output = document.getElementById("output");
 
@@ -125,15 +122,15 @@
         fetch(url)
           .then(
             function(response) {
-              if(response.status !== 200) {
-                throw Error(response.statusText);
-                return;
+              if(!response.ok) {
+                output.innerHTML = `${response.status}: ${response.statusText}`;
               }
-
-              //Examine the text in the response
-              response.json().then(function(data) {
-                output.innerHTML = JSON.stringify(data);
-              });
+              else {
+                //Examine the text in the response
+                response.json().then(data => 
+                  output.innerHTML = JSON.stringify(data)
+                );
+              }
             }
           )
           .catch(function(err) {
@@ -225,7 +222,7 @@
       // request; check the writeup to view the URL pattern for get one and delete. THERE IS NO 
       // delete all, only delete one.
       function deleteRecord() {
-        let url = document.getElementById("endpoint");
+        let url = document.getElementById("endpoint").value;
         let id = window.prompt("Enter record id");
         let output = document.getElementById("output");
         if(id == "" || id == null){
